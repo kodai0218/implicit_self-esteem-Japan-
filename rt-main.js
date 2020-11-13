@@ -36,63 +36,55 @@ var pc_check = {
   choices: ["space"]
 };
 
+var name_get = {
+    type: 'survey-text',
+    questions: [
+          {prompt: '<p>次に行う実験でどうしても必要なため記入をお願いしております。</p>'+'<p>プライバシー保護には十分配慮致します。</p>'+'<b>名字（姓）</b>を入力してください（例：田中 太郎さんなら、<b>田中</b>）', name: 'name_up', required:'True'},
+          {prompt: '<b>名前（名）</b>を入力してください（例：田中 太郎さんなら、<b>太郎</b>）', name: 'name_do', required:'True'},
+          {prompt: 'なまえを<b>ひらがな(スペース不要)</b>を入力してください（例：田中 太郎さんなら、<b>たなかたろう</b>）', name: 'name_hiragana', required:'True'}
+        ],
+    button_label: '次へ',
+    on_finish: function(data){
+      nameup = JSON.parse(data.responses).name_up;
+      jsPsych.data.addProperties({name01: nameup});
+      namedo = JSON.parse(data.responses).name_do;
+      jsPsych.data.addProperties({name02: namedo});
+    }
+}
 
 
 
-var nameget_q1 = {
-  type: "survey-text",
-  questions: [
-        {prompt: "名字（姓）を入力してください（例：田中 太郎さんなら、田中）"+" <p>次に行う実験でどうしても必要なため記入をお願いしております。</p>"+" <p>ここで収集した名前については、次の課題でのみ使用し、分析には使用致しません。</p>"+"<p>プライバシー保護には十分配慮致します。</p>", name: 'name_up', required:"True"}
-      ],
-  button_label: "次へ",
-  on_finish: function(data){
-    nameup = JSON.parse(data.responses).name_up;
-    jsPsych.data.addProperties({name01: nameup});
-  }
-};
-
-var nameget_q2 = {
-  type: "survey-text",
-  questions: [
-        {prompt: "<p>名前（名）を入力してください（例：田中 太郎さんなら、太郎）</p>"+" <p>ここで収集した名前については、次の課題でのみ使用し、分析には使用致しません。</p>"+"<p>プライバシー保護には十分配慮致します。</p>", name: 'name_down', required:"True"}
-      ],
-  button_label: "次へ",
-  on_finish: function(data){
-    namedo = JSON.parse(data.responses).name_down;
-    jsPsych.data.addProperties({name02: namedo});
-  }
-};
 
 
 //教示文を読んで入力してもらう
 var iat_instruction_test = {
   type: "html-keyboard-response",
-  stimulus:"<img src='https://kodai0218.github.io/iat-self-esteem/Picture03.png' width='60%'>"+"<p style = 'font-size:1.5em; text-align: center'>練習です</p>"+"<p>キーボードを利用した単語の分類課題を行います。</p>"+"<p>画面中央に表示される単語が、左上の<b>「よい」</b>または<b>「虫」</b>のカテゴリーに当てはまると思ったら<b>「E」</b>キーを、<br>右上の<b>「わるい」</b>のカテゴリーに当てはまると思ったら<b>「I」</b>キーを押してください。</p>"+ "<p><b>左右のカテゴリーは固定で、中央の単語が変わります。</b></p>"+"<p>間違えるとX（バツ）が中央に表示されるので、押したキーと反対のキーを押してください</br><b>スペースキー</b>を押すと開始します。</p>"+"<p style = 'font-size: 1.5em;'>単語が表示されたら、なるべく早く回答してください。</p>",
+  stimulus:"<img src='https://kodai0218.github.io/implicit-self-esteem-Japan-/Picture03.png' width='60%'>"+"<p style = 'font-size:1.5em; text-align: center'>練習です</p>"+"<p>キーボードを利用した単語の分類課題を行います。</p>"+"<p>画面中央に表示される単語が、左上の<b>「よい」</b>または<b>「虫」</b>のカテゴリーに当てはまると思ったら<b>「E」</b>キーを、<br>右上の<b>「わるい」</b>のカテゴリーに当てはまると思ったら<b>「I」</b>キーを押してください。</p>"+ "<p><b>左右のカテゴリーは固定で、中央の単語が変わります。</b></p>"+"<p>間違えるとX（バツ）が中央に表示されるので、押したキーと反対のキーを押してください</br><b>スペースキー</b>を押すと開始します。</p>"+"<p style = 'font-size: 1.5em;'>単語が表示されたら、なるべく早く回答してください。</p>",
   choices: ["space"]
 };
 
 var iat_instruction = {
   type: "html-keyboard-response",
-  stimulus:"<img src='https://kodai0218.github.io/iat-self-esteem/Picture05.png' width='60%'>"+"<p style = 'font-size:1.5em; text-align: center'>本番です</p>"+"<p style = 'font-size: 2em;'><b>左右のカテゴリーが変わっています</b></p>"+"<p>キーボードを利用した単語の分類課題を行います。</p>"+"<p>画面中央に表示される単語が、左上の<b>「よい」</b>または<b>「自己」</b>のカテゴリーに当てはまると思ったら<b>「E」</b>キーを、<br>右上の<b>「わるい」</b>のカテゴリーに当てはまると思ったら<b>「I」</b>キーを押してください。</p>"+ "<p><b>左右のカテゴリーは固定で、中央の単語が変わります。</b></p>"+"<p>間違えるとX（バツ）が中央に表示されるので、押したキーと反対のキーを押してください</br><b>スペースキー</b>を押すと開始します。</p>"+"<p style = 'font-size: 1.5em;'>単語が表示されたら、なるべく早く回答してください。</p>",
+  stimulus:"<img src='https://kodai0218.github.io/implicit-self-esteem-Japan-/Picture05.png' width='60%'>"+"<p style = 'font-size:1.5em; text-align: center'>本番です</p>"+"<p style = 'font-size: 2em;'><b>左右のカテゴリーが変わっています</b></p>"+"<p>キーボードを利用した単語の分類課題を行います。</p>"+"<p>画面中央に表示される単語が、左上の<b>「よい」</b>または<b>「自己」</b>のカテゴリーに当てはまると思ったら<b>「E」</b>キーを、<br>右上の<b>「わるい」</b>のカテゴリーに当てはまると思ったら<b>「I」</b>キーを押してください。</p>"+ "<p><b>左右のカテゴリーは固定で、中央の単語が変わります。</b></p>"+"<p>間違えるとX（バツ）が中央に表示されるので、押したキーと反対のキーを押してください</br><b>スペースキー</b>を押すと開始します。</p>"+"<p style = 'font-size: 1.5em;'>単語が表示されたら、なるべく早く回答してください。</p>",
   choices: ["space"]
 };
 
 var iat_brakegood = {
   type: "html-keyboard-response",
-  stimulus:"<img src='https://kodai0218.github.io/iat-self-esteem/Picture05.png' width='60%'>"+"<p style = 'font-size:1.5em; text-align: center'>休憩です</p>"+"<p>キーボードを利用した単語の分類課題を行います。</p>"+"<p>画面中央に表示される単語が、左上の<b>「よい」</b>または<b>「自己」</b>のカテゴリーに当てはまると思ったら<b>「E」</b>キーを、<br>右上の「わるい」のカテゴリーに当てはまると思ったら<b>「I」</b>キーを押してください。</p>"+ "<p><b>左右のカテゴリーは固定で、中央の単語が変わります。</b></p>"+"<p>間違えるとX（バツ）が中央に表示されるので、押したキーと反対のキーを押してください</br><b>スペースキー</b>を押すと開始します。</p>"+"<p style = 'font-size: 1.5em;'>単語が表示されたら、なるべく早く回答してください。</p>",
+  stimulus:"<img src='https://kodai0218.github.io/implicit-self-esteem-Japan-/Picture05.png' width='60%'>"+"<p style = 'font-size:1.5em; text-align: center'>休憩です</p>"+"<p>キーボードを利用した単語の分類課題を行います。</p>"+"<p>画面中央に表示される単語が、左上の<b>「よい」</b>または<b>「自己」</b>のカテゴリーに当てはまると思ったら<b>「E」</b>キーを、<br>右上の「わるい」のカテゴリーに当てはまると思ったら<b>「I」</b>キーを押してください。</p>"+ "<p><b>左右のカテゴリーは固定で、中央の単語が変わります。</b></p>"+"<p>間違えるとX（バツ）が中央に表示されるので、押したキーと反対のキーを押してください</br><b>スペースキー</b>を押すと開始します。</p>"+"<p style = 'font-size: 1.5em;'>単語が表示されたら、なるべく早く回答してください。</p>",
   choices: ["space"]
 };
 
 
 var iat_brakechange = {
   type: "html-keyboard-response",
-  stimulus:"<img src='https://kodai0218.github.io/iat-self-esteem/Picture06.png' width='60%'>"+"<p style = 'font-size:1.5em; text-align: center'>休憩です</p>"+"<p>キーボードを利用した単語の分類課題を行います。</p>"+"<p style = 'font-size: 2em;'><b>左右のカテゴリーが変わっています</b></p>"+"<p>画面中央に表示される単語が、左上の<b>「よい」</b>カテゴリーに当てはまると思ったら<b>「E」</b>キーを、<br>右上の<b>「わるい」</b>又は<b>「自己」</b>のカテゴリーに当てはまると思ったら<b>「I」</b>キーを押してください。</p>"+ "<p><b>左右のカテゴリーは固定で、中央の単語が変わります。</b></p>"+"<p>間違えるとX（バツ）が中央に表示されるので、押したキーと反対のキーを押してください</br><b>スペースキー</b>を押すと開始します。</p>"+"<p style = 'font-size: 1.5em;'>単語が表示されたら、なるべく早く回答してください。</p>",
+  stimulus:"<img src='https://kodai0218.github.io/implicit-self-esteem-Japan-/Picture06.png' width='60%'>"+"<p style = 'font-size:1.5em; text-align: center'>休憩です</p>"+"<p>キーボードを利用した単語の分類課題を行います。</p>"+"<p style = 'font-size: 2em;'><b>左右のカテゴリーが変わっています</b></p>"+"<p>画面中央に表示される単語が、左上の<b>「よい」</b>カテゴリーに当てはまると思ったら<b>「E」</b>キーを、<br>右上の<b>「わるい」</b>又は<b>「自己」</b>のカテゴリーに当てはまると思ったら<b>「I」</b>キーを押してください。</p>"+ "<p><b>左右のカテゴリーは固定で、中央の単語が変わります。</b></p>"+"<p>間違えるとX（バツ）が中央に表示されるので、押したキーと反対のキーを押してください</br><b>スペースキー</b>を押すと開始します。</p>"+"<p style = 'font-size: 1.5em;'>単語が表示されたら、なるべく早く回答してください。</p>",
   choices: ["space"]
 };
 
 var iat_brakebad = {
   type: "html-keyboard-response",
-  stimulus:"<img src='https://kodai0218.github.io/iat-self-esteem/Picture06.png' width='60%'>"+"<p style = 'font-size:1.5em; text-align: center'>休憩です</p>"+"<p>キーボードを利用した単語の分類課題を行います。</p>"+"<p>画面中央に表示される単語が、左上の<b>「よい」</b>カテゴリーに当てはまると思ったら<b>「E」</b>キーを、<br>右上の<b>「わるい」</b>または<b>「自己」</b>のカテゴリーに当てはまると思ったら<b>「I」</b>キーを押してください。</p>"+ "<p><b>左右のカテゴリーは固定で、中央の単語が変わります。</b></p>"+"<p>間違えるとX（バツ）が中央に表示されるので、押したキーと反対のキーを押してください</br><b>スペースキー</b>を押すと開始します。</p>"+"<p style = 'font-size: 1.5em;'>単語が表示されたら、なるべく早く回答してください。</p>",
+  stimulus:"<img src='https://kodai0218.github.io/implicit-self-esteem-Japan-/Picture06.png' width='60%'>"+"<p style = 'font-size:1.5em; text-align: center'>休憩です</p>"+"<p>キーボードを利用した単語の分類課題を行います。</p>"+"<p>画面中央に表示される単語が、左上の<b>「よい」</b>カテゴリーに当てはまると思ったら<b>「E」</b>キーを、<br>右上の<b>「わるい」</b>または<b>「自己」</b>のカテゴリーに当てはまると思ったら<b>「I」</b>キーを押してください。</p>"+ "<p><b>左右のカテゴリーは固定で、中央の単語が変わります。</b></p>"+"<p>間違えるとX（バツ）が中央に表示されるので、押したキーと反対のキーを押してください</br><b>スペースキー</b>を押すと開始します。</p>"+"<p style = 'font-size: 1.5em;'>単語が表示されたら、なるべく早く回答してください。</p>",
   choices: ["space"]
 };
 
@@ -544,8 +536,7 @@ timeline.push({
 });
 
 
-timeline.push(nameget_q1);
-timeline.push(nameget_q2);
+timeline.push(name_get);
 timeline.push(iat_instruction_test);
 timeline.push(trial_test01);
 timeline.push(iat_instruction);
